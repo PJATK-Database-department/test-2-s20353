@@ -25,6 +25,13 @@ namespace Test_2.Services
             return await _context.CityDicts.FindAsync(cityName);
         }
 
+        public async Task<List<Flight>> GetListofFlightsToCitysAsync(CityDict city)
+        {
+            var flights =  await _context.Flights.ToListAsync();
+            var result = flights.FindAll(t => t.IdCityDict == city.IdCityDict);
+            return result;
+        }
+
         public async Task<List<Flight>> GetListofFlightssAsync()
         {
             return await _context.Flights.ToListAsync();
@@ -46,7 +53,8 @@ namespace Test_2.Services
 
         public async Task<List<Passenger>> GetPassengersForCityAsync(CityDict city)
         {
-            //var flights = 
+            var flights = await GetListofFlightsToCitysAsync(city);
+            var pass = new List<Passenger>();
             //return result;
             return null;
         }
