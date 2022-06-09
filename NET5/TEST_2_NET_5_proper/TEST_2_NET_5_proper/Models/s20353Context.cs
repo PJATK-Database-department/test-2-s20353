@@ -15,7 +15,7 @@ namespace Test_2.Models
 
         public DbSet<Plane> Planess { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
-        public DbSet<Flight_Passenger> Firefighter_Actions { get; set; }
+        public DbSet<Flight_Passenger> Flight_Passengers { get; set; }
         public DbSet<CityDict> CityDicts { get; set; }
         public DbSet<Flight> Flights { get; set; }
 

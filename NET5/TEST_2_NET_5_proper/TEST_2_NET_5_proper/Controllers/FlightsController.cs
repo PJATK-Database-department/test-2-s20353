@@ -20,12 +20,21 @@ namespace Test_2.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetFlights([FromQuery(Name = "cityname")] string? cityName)
         {
-            if (cityName == null)
+            if (cityName != null)
             {
-                return StatusCode(404, "City not specified");
+                if (await _databaseService.CityExistsAsync(cityName))
+                {
+                    var city = await _databaseService.GetCityAsync(cityName);
+                    return Ok(_databaseService.GetPassengersForCityAsync(city));
+                }
+                else
+                {
+                    return StatusCode(404, "City not found in database");
+                }
+
             }
 
-            return StatusCode(404, "Flights not found");
+            return Ok("Flights");
         }
     }
 }
